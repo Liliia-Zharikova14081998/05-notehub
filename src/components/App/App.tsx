@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
 import { useDebounce } from 'use-debounce';
 import { fetchNotes } from '../../services/noteService';
-import type { PaginatedNotes } from '../../types/note';
+import type { PaginatedNotes } from '../../types/pagination';
 
 
 export default function App() {
@@ -27,21 +27,28 @@ export default function App() {
     placeholderData: keepPreviousData,
   });
 
+const handleSearch = (value: string) => {
+  setSearch(value);
+  setPage(1);
+}
+
   return (
     <div className={css.app}>
 	<header className={css.toolbar}>
-		<SearchBox value={search} onSearch={setSearch} />
-		<Pagination
-          currentPage={page}
-          totalPages={data ? data.totalPages : 1}
-          onPageChange={setPage} />
+        <SearchBox value={search} onSearch={handleSearch} />
+        {data && data.totalNumberOfPages > 1 && (
+          <Pagination
+            currentPage={page}
+            totalNumberOfPages={data.totalNumberOfPages}
+            onPageChange={setPage} />
+        )}
         <button className={css.button} onClick={openModal}>Create note +</button>
         </header>
         <NoteList
           notes={data?.notes || []}
           isLoading={isLoading}
           isError={isError} />
-  { isModalOpen && (
+    {isModalOpen && (
         <Modal onClose={closeModal}>
       <NoteForm onClose={closeModal} />
         </Modal>  

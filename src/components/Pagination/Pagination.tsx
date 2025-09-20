@@ -3,12 +3,12 @@ import css from "./Pagination.module.css"
 
 interface PaginationProps {
     currentPage: number;
-    totalPages: number;
+    totalNumberOfPages: number;
     onPageChange: (page: number) => void;
 }
 
-export default function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) {
-    if (totalPages <= 1) return null;
+export default function Pagination({ currentPage, totalNumberOfPages, onPageChange }: PaginationProps) {
+    if (totalNumberOfPages <= 1) return null;
     return (
         <ReactPaginate
             className={css.pagination}
@@ -22,8 +22,8 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
             breakLabel="..."                            
             nextLabel="→"                           
             forcePage={currentPage - 1}                  
-            pageCount={totalPages}                       
-            onPageChange={(selectedItem) => onPageChange(selectedItem.selected + 1) 
+            pageCount={totalNumberOfPages}                       
+            onPageChange={(selectedItem: { selected: number }) => onPageChange(selectedItem.selected + 1) 
         }
         />
     );

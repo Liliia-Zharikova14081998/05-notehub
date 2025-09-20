@@ -3,6 +3,8 @@ export interface Note {
     title: string;
     content: string;
     tag: string;
+    createdAt: string;
+    updatedAt: string;
 }
 
 export interface CreateNoteData { 
@@ -11,8 +13,3 @@ export interface CreateNoteData {
     tag?: string;
 }
 
-export interface PaginatedNotes {
-    notes: Note[];
-    page: number;
-    totalPages: number;
-}
