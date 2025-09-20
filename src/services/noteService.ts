@@ -1,5 +1,6 @@
 import axios from "axios";
-import type { Note, CreateNoteData, PaginatedNotes } from "../types/note";
+import type { Note, CreateNoteData } from "../types/note";
+import type { PaginatedNotes } from "../types/pagination";
 
 
 const TOKEN = import.meta.env.VITE_NOTEHUB_TOKEN;
