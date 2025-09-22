@@ -11,6 +11,7 @@ import { fetchNotes } from '../../services/noteService';
 import type { PaginatedNotes } from '../../types/pagination';
 
 
+
 export default function App() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -36,10 +37,10 @@ const handleSearch = (value: string) => {
     <div className={css.app}>
 	<header className={css.toolbar}>
         <SearchBox value={search} onSearch={handleSearch} />
-        {data && data.totalNumberOfPages > 1 && (
+        {data && data.totalPages > 1 && (
           <Pagination
             currentPage={page}
-            totalNumberOfPages={data.totalNumberOfPages}
+            totalPages={data?.totalPages}
             onPageChange={setPage} />
         )}
         <button className={css.button} onClick={openModal}>Create note +</button>
